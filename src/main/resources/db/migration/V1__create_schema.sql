@@ -1,0 +1,12 @@
+CREATE SEQUENCE "USER_ID_SEQ"
+  MINVALUE 100000
+  MAXVALUE 9223372036854775807
+  CACHE 10;
+CREATE TABLE "USER" (
+  "ID"                        NUMBER(10,2) PRIMARY KEY,
+  "MAC"                       BLOB,
+  "USERNAME"                  VARCHAR2(255 CHAR),
+  "CURRENT_CURRENCY"          NUMBER(10,2),
+  "TOTAL_CURRENCY"            NUMBER(10,2),
+  "MAXIMUM_SPENT"             NUMBER(10,2)
+);
