@@ -19,7 +19,7 @@ public class PayController {
 
 	private final PayService payService;
 
-	@PostMapping(value = "/api/currency/{amount}")
+	@PostMapping(value = "/api/pay/{amount}")
 	public void pay(@PathVariable final BigInteger amount) throws UnknownHostException, SocketException {
 		final InetAddress ip = InetAddress.getLocalHost();
 		final NetworkInterface network = NetworkInterface.getByInetAddress(ip);

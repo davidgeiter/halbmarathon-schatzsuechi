@@ -15,17 +15,17 @@ public class CurrencyService {
 	private final CurrencyRepository currencyRepository;
 
 	public void moneymoney(final BigInteger qrId, final byte[] macAddress) {
-		final User user = currencyRepository.findAll().stream()
+		final Athlete athlete = currencyRepository.findAll().stream()
 													  .filter(u -> Arrays.equals(u.getMacAddress(), macAddress))
 													  .findAny().orElseGet(() -> createNewUser(qrId, macAddress));
-		if (!user.qrCodeExists(qrId)) {
-			updateUser(user, qrId);
+		if (!athlete.qrCodeExists(qrId)) {
+			updateUser(athlete, qrId);
 		}
 	}
 
 	//TODO: handle username
-	private User createNewUser(final BigInteger qrId, final byte[] macAddress) {
-		final User user = User.builder()
+	private Athlete createNewUser(final BigInteger qrId, final byte[] macAddress) {
+		final Athlete athlete = Athlete.builder()
 				.username("defaultname")
 				.macAddress(macAddress)
 				.currentCurrency(BigInteger.ONE)
@@ -33,13 +33,13 @@ public class CurrencyService {
 				.maximumSpent(BigInteger.ZERO)
 				.codes(Collections.singletonList(new QrCode(qrId)))
 				.build();
-		return currencyRepository.save(user);
+		return currencyRepository.save(athlete);
 	}
 
-	private void updateUser(final User user, final BigInteger qrId) {
-		user.setCurrentCurrency(user.getCurrentCurrency().add(BigInteger.ONE));
-		user.addQrCode(new QrCode(qrId));
-		currencyRepository.save(user);
+	private void updateUser(final Athlete athlete, final BigInteger qrId) {
+		athlete.setCurrentCurrency(athlete.getCurrentCurrency().add(BigInteger.ONE));
+		athlete.addQrCode(new QrCode(qrId));
+		currencyRepository.save(athlete);
 	}
 }
 

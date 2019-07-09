@@ -15,12 +15,13 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
 @Data
-@ToString(exclude = "user")
-@EqualsAndHashCode(exclude = "user")
+@ToString(exclude = "athlete")
+@EqualsAndHashCode(exclude = "athlete")
 public class QrCode {
 
 	@Id
@@ -32,8 +33,8 @@ public class QrCode {
 
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "USER_ID", nullable = false)
-	private User user;
+	@JoinColumn(name = "ATHLETE_ID", nullable = false)
+	private Athlete athlete;
 
 	public QrCode(final BigInteger code){
 		this.code = code;

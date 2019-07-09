@@ -16,7 +16,7 @@ public class HighscoreController {
 
 	private final HighscoreService highscoreService;
 
-	@PostMapping(value = "/api/currency/{qrId}")
+	@PostMapping(value = "/api/highscore")
 	public ScoresDto getHighscore(@PathVariable final BigInteger qrId) throws UnknownHostException, SocketException {
 		return highscoreService.getHighscores();
 	}
