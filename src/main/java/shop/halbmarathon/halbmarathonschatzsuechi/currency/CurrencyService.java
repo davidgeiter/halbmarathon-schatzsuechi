@@ -13,13 +13,18 @@ public class CurrencyService {
 
 	private final CurrencyRepository currencyRepository;
 
-	public void moneymoney(final BigInteger qrId, final String username) {
+	public ResponseDto moneymoney(final BigInteger qrId, final String username) {
 		final Athlete athlete = currencyRepository.findAll().stream()
 													  .filter(a -> username.equals(a.getUsername()))
 													  .findAny().orElseGet(() -> createNewUser(qrId, username));
 		if (!athlete.qrCodeExists(qrId)) {
 			updateUser(athlete, qrId);
 		}
+
+		final BigInteger difference = BigInteger.ONE;
+
+		return new ResponseDto(difference, athlete.getCurrentCurrency());
+
 	}
 
 	private Athlete createNewUser(final BigInteger qrId, final String username) {
