@@ -1,24 +1,34 @@
-import React, { useState, useEffect } from "react"
-import { apiHost } from "../config"
+import React, { useState, useEffect, Fragment } from "react"
 import { withUsername } from "../components/WithUsername"
 import QrCodeReader from "../components/QrCodeReader"
-import { withRouter } from "react-router"
+import { getStats } from "../lib/api"
 
-export default withUsername(({ username, history }) => {
-  const [currency, setCurrency] = useState(null)
+export default withUsername(({ username }) => {
+  const [stats, setStats] = useState(null)
 
   useEffect(() => {
-    const fetchCurrency = async () => {
-      const resp = await fetch(`${apiHost}/stats`).then(r => r.json())
-      setCurrency(resp.currentCurrency)
+    const makeRequest = async () => {
+      const resp = await getStats(username)
+      setStats(resp)
     }
-    fetchCurrency()
+    makeRequest()
   }, [])
 
   return (
     <div>
-      <h1>Hello! {username}</h1>
-      <h2>wallet: {currency}</h2>
+      <h1>Hello {username}!</h1>
+      {stats !== null && (
+        <Fragment>
+          <h2>Your Stats:</h2>
+          <ul>
+            <li>current: {stats.currentCurrency}</li>
+            <li>current: {stats.totalCurrency}</li>
+            <li>current: {stats.totalSpent}</li>
+            <li>current: {stats.totalCodesFound}</li>
+          </ul>
+        </Fragment>
+      )}
+
       <div>
         <QrCodeReader
           onValidUrl={url => {
