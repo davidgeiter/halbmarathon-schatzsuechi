@@ -34,6 +34,7 @@ public class Athlete {
 	private BigInteger totalCurrency;
 	private BigInteger currentCurrency;
 	private BigInteger maximumSpent;
+	private BigInteger totalCodesFound;
 
 	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "athlete")
@@ -53,7 +54,7 @@ public class Athlete {
 		codes = new ArrayList<>();
 	}
 
-	public boolean qrCodeExists(final BigInteger qrCode) {
+	public boolean qrCodeExists(final String qrCode) {
 		return codes.stream().anyMatch(c -> qrCode.equals(c.getCode()));
 	}
 

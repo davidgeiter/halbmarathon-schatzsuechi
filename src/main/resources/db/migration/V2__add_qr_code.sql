@@ -5,6 +5,6 @@ CREATE SEQUENCE "QR_CODE_ID_SEQ"
 CREATE TABLE "QR_CODE" (
   "ID"                        BIGINT PRIMARY KEY,
   "ATHLETE_ID"                VARCHAR(255),
-  "CODE"                      NUMBER(19),
+  "CODE"                      VARCHAR(255),
   CONSTRAINT "FK_QR_CODE_ID" FOREIGN KEY ("ATHLETE_ID") REFERENCES "ATHLETE"
 );
