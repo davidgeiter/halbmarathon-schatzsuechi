@@ -20,9 +20,7 @@ public class CurrencyService {
 	private final CurrencyRepository currencyRepository;
 
 	public ResponseDto moneymoney(final String qrId, final String username) {
-		final Athlete athlete = currencyRepository.findAll().stream()
-				.filter(a -> username.equals(a.getUsername()))
-				.findAny().orElseGet(() -> createNewUser(username));
+		final Athlete athlete = getAthleteByUsername(username);
 
 		final Optional<QrCodeDto> optionalCode = getQrCode(qrId);
 
@@ -41,6 +39,12 @@ public class CurrencyService {
 			updateUser(athlete, code);
 			return new ResponseDto(code.getDifference(), athlete.getCurrentCurrency(), Status.SUCCESS);
 		}
+	}
+
+	public Athlete getAthleteByUsername(final String username) {
+		return currencyRepository.findAll().stream()
+				.filter(a -> username.equals(a.getUsername()))
+				.findAny().orElseGet(() -> createNewUser(username));
 	}
 
 	private Optional<QrCodeDto> getQrCode(final String qrId) {

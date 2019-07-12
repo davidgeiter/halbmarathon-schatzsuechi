@@ -1,11 +1,13 @@
 package shop.halbmarathon.halbmarathonschatzsuechi.highscore;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import shop.halbmarathon.halbmarathonschatzsuechi.currency.Athlete;
 import shop.halbmarathon.halbmarathonschatzsuechi.currency.CurrencyRepository;
 
 @Service
@@ -16,7 +18,7 @@ public class HighscoreService {
 
 	public ScoresDto getHighscores() {
 		final List<Score> scores = currencyRepository.findAll().stream()
-				.sorted()
+				.sorted(Comparator.comparingInt(Athlete::getCurrentCurrencyAsInt))
 				.limit(10)
 				.map(a -> new Score(a.getTotalCurrency()))
 				.collect(Collectors.toList());
