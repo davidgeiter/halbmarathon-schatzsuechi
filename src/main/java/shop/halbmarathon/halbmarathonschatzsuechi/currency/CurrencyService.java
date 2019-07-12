@@ -27,16 +27,19 @@ public class CurrencyService {
 		final Optional<QrCodeDto> optionalCode = getQrCode(qrId);
 
 		if (!optionalCode.isPresent()) {
-			return new ResponseDto(null, athlete.getTotalCurrency(), false, null);
+			return new ResponseDto(null, athlete.getTotalCurrency(), Status.INVALID_CODE);
 		}
 
 		final QrCodeDto code = optionalCode.orElseThrow(() -> new IllegalStateException("no QR code present"));
 
 		if (athlete.qrCodeExists(code.getCode())) {
-			return new ResponseDto(code.getDifference(), athlete.getCurrentCurrency(), true, true);
+			return new ResponseDto(code.getDifference(), athlete.getCurrentCurrency(), Status.ALREADEY_SCANNED);
 		} else {
+			if (code.getDifference().add(athlete.getCurrentCurrency()).compareTo(BigInteger.ZERO) < 0) {
+				return new ResponseDto(code.getDifference(), athlete.getCurrentCurrency(), Status.NOT_ENOUGH_CASH);
+			}
 			updateUser(athlete, code);
-			return new ResponseDto(code.getDifference(), athlete.getCurrentCurrency(), true, false);
+			return new ResponseDto(code.getDifference(), athlete.getCurrentCurrency(), Status.SUCCESS);
 		}
 	}
 

@@ -11,7 +11,6 @@ public class ResponseDto {
 
 	private BigInteger difference;
 	private BigInteger currentCurrency;
-	private Boolean isValid;
-	private Boolean codeAlreadyScanned;
+	private Status status;
 
 }
