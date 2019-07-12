@@ -3,9 +3,9 @@ import { sendCode } from "../lib/api"
 import { withUsername } from "../components/WithUsername"
 import { Link } from "react-router-dom"
 
-const SuccessMessage = result => (
+const SuccessMessage = ({ result }) => (
   <span>
-    Congrats! You topped your score by {result.difference}, now at $
+    Congrats! You topped your score by {result.difference}, now at
     {result.currentCurrency}
   </span>
 )
@@ -16,7 +16,7 @@ const NotEnoughCash = () => (
   <span>Sorry honeyyy, but you can't afford that!</span>
 )
 
-const Result = result => {
+const Result = ({ result }) => {
   const { status, difference } = result
 
   switch (status) {
@@ -29,7 +29,7 @@ const Result = result => {
     case "NOT_ENOUGH_CASH":
       return <NotEnoughCash />
     default:
-      return () => <span>Invalid status from server: {status}</span>
+      return <span>Invalid status from server: {status}</span>
   }
 }
 

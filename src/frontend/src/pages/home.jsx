@@ -21,10 +21,10 @@ export default withUsername(({ username }) => {
         <Fragment>
           <h2>Your Stats:</h2>
           <ul>
-            <li>current: {stats.currentCurrency}</li>
-            <li>current: {stats.totalCurrency}</li>
-            <li>current: {stats.totalSpent}</li>
-            <li>current: {stats.totalCodesFound}</li>
+            <li>currentCurrency: {stats.currentCurrency}</li>
+            <li>totalCurrency: {stats.totalCurrency}</li>
+            <li>totalSpent: {stats.totalSpent}</li>
+            <li>totalCodesFound: {stats.totalCodesFound}</li>
           </ul>
         </Fragment>
       )}
