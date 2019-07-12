@@ -15,7 +15,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
@@ -38,5 +37,9 @@ public class QrCode {
 
 	public QrCode(final BigInteger code){
 		this.code = code;
+	}
+
+	public QrCode() {
+		//default constructor
 	}
 }

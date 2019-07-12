@@ -17,6 +17,7 @@ import javax.persistence.SequenceGenerator;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,17 +26,19 @@ import lombok.Setter;
 @Data
 @Entity
 @Builder
+@AllArgsConstructor
 public class Athlete {
+
+	@Id
+	private String username;
+	private BigInteger totalCurrency;
+	private BigInteger currentCurrency;
+	private BigInteger maximumSpent;
 
 	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "athlete")
 	@Setter(AccessLevel.NONE)
 	private List<QrCode> codes;
-
-	private String username;
-	private BigInteger totalCurrency;
-	private BigInteger currentCurrency;
-	private BigInteger maximumSpent;
 
 
 	public void addQrCode(final QrCode code) {
@@ -52,6 +55,10 @@ public class Athlete {
 
 	public boolean qrCodeExists(final BigInteger qrCode) {
 		return codes.stream().anyMatch(c -> qrCode.equals(c.getCode()));
+	}
+
+	public Athlete() {
+		//default constructor
 	}
 
 }

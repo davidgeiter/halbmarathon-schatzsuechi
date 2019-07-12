@@ -21,7 +21,7 @@ public class CurrencyService {
 			updateUser(athlete, qrId);
 		}
 	}
-	
+
 	private Athlete createNewUser(final BigInteger qrId, final String username) {
 		final Athlete athlete = Athlete.builder()
 				.username(username)

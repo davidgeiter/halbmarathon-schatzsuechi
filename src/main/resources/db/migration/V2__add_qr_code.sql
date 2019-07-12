@@ -4,7 +4,7 @@ CREATE SEQUENCE "QR_CODE_ID_SEQ"
   CACHE 10;
 CREATE TABLE "QR_CODE" (
   "ID"                        BIGINT PRIMARY KEY,
-  "ATHLETE_ID"                BIGINT,
+  "ATHLETE_ID"                VARCHAR(255),
   "CODE"                      NUMBER(19),
   CONSTRAINT "FK_QR_CODE_ID" FOREIGN KEY ("ATHLETE_ID") REFERENCES "ATHLETE"
 );
