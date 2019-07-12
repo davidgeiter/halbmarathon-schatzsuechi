@@ -1,4 +1,5 @@
 import QrReader from "react-qr-scanner"
+import React from "react"
 
 const previewStyle = {
   height: 240,

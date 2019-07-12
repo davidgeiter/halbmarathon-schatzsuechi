@@ -1,25 +1,36 @@
 import { createStore, applyMiddleware } from "redux"
-import { handleActions } from "redux-actions"
+import { handleActions, createAction } from "redux-actions"
 import { composeWithDevTools } from "redux-devtools-extension"
 import { persistStore, persistReducer } from "redux-persist"
 import storage from "redux-persist/lib/storage" // defaults to localStorage for web
 
 const initialState = {
-  foo: 1,
+  username: null,
 }
 
 const persistConfig = {
   key: "root",
   storage,
+  whitelist: ["username"],
 }
 
-const rootReducer = handleActions({}, initialState)
+export const setUsername = createAction("setUsername", username => username)
+
+const rootReducer = handleActions(
+  {
+    [setUsername.toString()]: (state, { payload }) => ({
+      ...state,
+      username: payload,
+    }),
+  },
+  initialState,
+)
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
-export function initializeStore(initialState = initialState) {
+export function initializeStore(state = initialState) {
   const store = createStore(
     persistedReducer,
-    initialState,
+    state,
     composeWithDevTools(applyMiddleware()),
   )
   const persistor = persistStore(store)
