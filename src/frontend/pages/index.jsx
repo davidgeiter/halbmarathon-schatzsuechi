@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic"
 
-const QrCodeReader = dynamic(() => import("../src/components/QrCodeReader"), {
+const QrCodeReader = dynamic(() => import("../components/QrCodeReader"), {
   ssr: false,
 })
 
