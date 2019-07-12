@@ -64,7 +64,7 @@ public class CurrencyService {
 				.build();
 	}
 
-	private Athlete createNewUser(final String username) {
+	public Athlete createNewUser(final String username) {
 		final Athlete athlete = Athlete.builder()
 				.username(username)
 				.currentCurrency(BigInteger.ZERO)
