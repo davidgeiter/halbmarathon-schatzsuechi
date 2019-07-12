@@ -37,7 +37,7 @@ public class Athlete {
 	private BigInteger totalCodesFound;
 
 	@JsonManagedReference
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "athlete")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "athlete")
 	@Setter(AccessLevel.NONE)
 	private List<QrCode> codes;
 
