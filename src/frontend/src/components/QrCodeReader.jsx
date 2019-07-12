@@ -3,7 +3,7 @@ import React from "react"
 
 const previewStyle = {
   height: 240,
-  width: 320,
+  width: "100%",
 }
 
 const parseCode = value => {
