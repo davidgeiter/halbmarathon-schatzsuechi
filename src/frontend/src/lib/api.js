@@ -1,12 +1,10 @@
 import { apiHost } from "../config"
 
-const sendRequest = async ({ path, username, method = "get" }) => {
-  const resp = await fetch(
-    `${apiHost}${path}${username ? `?username=${username}` : ""}`,
-    {
-      method,
-    },
-  )
+const sendRequest = async ({ path, username, method }) => {
+  const url = `${apiHost}${path}${username ? `?username=${username}` : ""}`
+  const resp = await fetch(url, {
+    method: method || "get",
+  })
   const json = await resp.json()
 
   return json

@@ -9,8 +9,7 @@ const previewStyle = {
 const parseCode = value => {
   try {
     const url = new URL(value)
-    // return url && url.origin === window.location.origin
-    return !!url
+    return url && url.origin === window.location.origin
   } catch (_) {
     return false
   }
