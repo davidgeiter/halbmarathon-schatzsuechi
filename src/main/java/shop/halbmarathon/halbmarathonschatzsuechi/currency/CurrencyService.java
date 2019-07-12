@@ -27,22 +27,25 @@ public class CurrencyService {
 		final Optional<QrCodeDto> optionalCode = getQrCode(qrId);
 
 		if (!optionalCode.isPresent()) {
-			return new ResponseDto(null, athlete.getTotalCurrency(), false, null);
+			return new ResponseDto(null, athlete.getTotalCurrency(), Status.INVALID_CODE);
 		}
 
 		final QrCodeDto code = optionalCode.orElseThrow(() -> new IllegalStateException("no QR code present"));
 
 		if (athlete.qrCodeExists(code.getCode())) {
-			return new ResponseDto(code.getDifference(), athlete.getCurrentCurrency(), true, true);
+			return new ResponseDto(code.getDifference(), athlete.getCurrentCurrency(), Status.ALREADY_SCANNED);
 		} else {
+			if (code.getDifference().add(athlete.getCurrentCurrency()).compareTo(BigInteger.ZERO) < 0) {
+				return new ResponseDto(code.getDifference(), athlete.getCurrentCurrency(), Status.NOT_ENOUGH_CASH);
+			}
 			updateUser(athlete, code);
-			return new ResponseDto(code.getDifference(), athlete.getCurrentCurrency(), true, false);
+			return new ResponseDto(code.getDifference(), athlete.getCurrentCurrency(), Status.SUCCESS);
 		}
 	}
 
 	private Optional<QrCodeDto> getQrCode(final String qrId) {
 		List<List<String>> records = new ArrayList<>();
-		try (BufferedReader br = new BufferedReader(new FileReader("/Users/davidgeiter/Halbmarathon19/halbmarathon-schatzsuechi/src/main/resources/qrCodes.csv"))) {
+		try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/qrCodes.csv"))) {
 			String line;
 			while ((line = br.readLine()) != null) {
 				String[] values = line.split(",");
