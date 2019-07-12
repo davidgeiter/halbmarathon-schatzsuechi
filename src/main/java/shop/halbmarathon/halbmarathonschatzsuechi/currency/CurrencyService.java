@@ -33,7 +33,7 @@ public class CurrencyService {
 		final QrCodeDto code = optionalCode.orElseThrow(() -> new IllegalStateException("no QR code present"));
 
 		if (athlete.qrCodeExists(code.getCode())) {
-			return new ResponseDto(code.getDifference(), athlete.getCurrentCurrency(), Status.ALREADEY_SCANNED);
+			return new ResponseDto(code.getDifference(), athlete.getCurrentCurrency(), Status.ALREADY_SCANNED);
 		} else {
 			if (code.getDifference().add(athlete.getCurrentCurrency()).compareTo(BigInteger.ZERO) < 0) {
 				return new ResponseDto(code.getDifference(), athlete.getCurrentCurrency(), Status.NOT_ENOUGH_CASH);
