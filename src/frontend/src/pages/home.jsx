@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react"
 import { apiHost } from "../config"
 import { withUsername } from "../components/WithUsername"
 import QrCodeReader from "../components/QrCodeReader"
+import { withRouter } from "react-router"
 
-export default withUsername(({ username }) => {
+export default withUsername(({ username, history }) => {
   const [currency, setCurrency] = useState(null)
 
   useEffect(() => {
@@ -19,7 +20,11 @@ export default withUsername(({ username }) => {
       <h1>Hello! {username}</h1>
       <h2>wallet: {currency}</h2>
       <div>
-        <QrCodeReader />
+        <QrCodeReader
+          onValidUrl={url => {
+            window.location.href = url
+          }}
+        />
       </div>
     </div>
   )
