@@ -32,7 +32,7 @@ public class QrCode {
 
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ATHLETE_ID", nullable = false)
+	@JoinColumn(name = "ATHLETE_USERNAME", nullable = false)
 	private Athlete athlete;
 
 	public QrCode(final String code){
