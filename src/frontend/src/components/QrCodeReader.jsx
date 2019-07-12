@@ -6,12 +6,27 @@ const previewStyle = {
   width: 320,
 }
 
-const QrCodeReader = () => (
+const parseCode = value => {
+  try {
+    const url = new URL(value)
+    // return url && url.origin === window.location.origin
+    return !!url
+  } catch (_) {
+    return false
+  }
+}
+
+const QrCodeReader = ({ onValidUrl }) => (
   <QrReader
     delay={100}
     style={previewStyle}
     onError={console.error}
-    onScan={console.log}
+    onScan={value => {
+      console.log(`Scanned: ${value}`)
+      if (parseCode(value)) {
+        onValidUrl(value)
+      }
+    }}
   />
 )
 
