@@ -58,8 +58,8 @@ public class Athlete {
 		return codes.stream().anyMatch(c -> qrCode.equals(c.getCode()));
 	}
 
-	public int getCurrentCurrencyAsInt() {
-		return currentCurrency.intValue();
+	public int getTotalCodesAsInt() {
+		return totalCodesFound.intValue();
 	}
 	public Athlete() {
 		//default constructor

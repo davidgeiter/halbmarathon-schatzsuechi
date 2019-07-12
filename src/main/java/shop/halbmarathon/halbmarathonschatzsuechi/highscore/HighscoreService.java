@@ -18,7 +18,7 @@ public class HighscoreService {
 
 	public ScoresDto getHighscores() {
 		final List<Score> scores = currencyRepository.findAll().stream()
-				.sorted(Comparator.comparingInt(Athlete::getCurrentCurrencyAsInt))
+				.sorted(Comparator.comparingInt(Athlete::getTotalCodesAsInt))
 				.limit(10)
 				.map(a -> new Score(a.getTotalCurrency()))
 				.collect(Collectors.toList());
