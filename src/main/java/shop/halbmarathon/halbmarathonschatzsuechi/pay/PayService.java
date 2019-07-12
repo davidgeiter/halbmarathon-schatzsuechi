@@ -15,9 +15,9 @@ public class PayService {
 
 	private final CurrencyRepository currencyRepository;
 
-	public void pay(final BigInteger amount, final byte[] macAddress) {
+	public void pay(final BigInteger amount, final String username) {
 		final Athlete athlete = currencyRepository.findAll().stream()
-				.filter(u -> Arrays.equals(u.getMacAddress(), macAddress))
+				.filter(a -> username.equals(a.getUsername()))
 				.findAny().orElseThrow(() -> new IllegalStateException("User does not exist"));
 		athlete.setCurrentCurrency(athlete.getCurrentCurrency().subtract(amount));
 		athlete.setMaximumSpent(athlete.getMaximumSpent().add(amount));

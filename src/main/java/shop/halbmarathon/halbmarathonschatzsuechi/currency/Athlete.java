@@ -27,24 +27,15 @@ import lombok.Setter;
 @Builder
 public class Athlete {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AthleteIdGenerator")
-	@SequenceGenerator(name = "AthleteIdGenerator", sequenceName = "ATHLETE_ID_SEQ", allocationSize = 1)
-	private Long id;
-
 	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "athlete")
 	@Setter(AccessLevel.NONE)
 	private List<QrCode> codes;
 
-	@Lob
-	private byte[] macAddress;
-
 	private String username;
 	private BigInteger totalCurrency;
 	private BigInteger currentCurrency;
 	private BigInteger maximumSpent;
-
 
 
 	public void addQrCode(final QrCode code) {

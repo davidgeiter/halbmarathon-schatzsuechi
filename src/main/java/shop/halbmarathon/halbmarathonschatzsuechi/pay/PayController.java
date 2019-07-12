@@ -9,6 +9,7 @@ import java.net.UnknownHostException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
 import shop.halbmarathon.halbmarathonschatzsuechi.currency.CurrencyService;
@@ -20,10 +21,7 @@ public class PayController {
 	private final PayService payService;
 
 	@PostMapping(value = "/api/pay/{amount}")
-	public void pay(@PathVariable final BigInteger amount) throws UnknownHostException, SocketException {
-		final InetAddress ip = InetAddress.getLocalHost();
-		final NetworkInterface network = NetworkInterface.getByInetAddress(ip);
-		final byte[] macAddress = network.getHardwareAddress();
-		payService.pay(amount, macAddress);
+	public void pay(@PathVariable final BigInteger amount, @RequestParam final String username) {
+		payService.pay(amount, username);
 	}
 }

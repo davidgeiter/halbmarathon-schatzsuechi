@@ -1,7 +1,6 @@
 package shop.halbmarathon.halbmarathonschatzsuechi.currency;
 
 import java.math.BigInteger;
-import java.util.Arrays;
 import java.util.Collections;
 
 import org.springframework.stereotype.Service;
@@ -14,20 +13,18 @@ public class CurrencyService {
 
 	private final CurrencyRepository currencyRepository;
 
-	public void moneymoney(final BigInteger qrId, final byte[] macAddress) {
+	public void moneymoney(final BigInteger qrId, final String username) {
 		final Athlete athlete = currencyRepository.findAll().stream()
-													  .filter(u -> Arrays.equals(u.getMacAddress(), macAddress))
-													  .findAny().orElseGet(() -> createNewUser(qrId, macAddress));
+													  .filter(a -> username.equals(a.getUsername()))
+													  .findAny().orElseGet(() -> createNewUser(qrId, username));
 		if (!athlete.qrCodeExists(qrId)) {
 			updateUser(athlete, qrId);
 		}
 	}
-
-	//TODO: handle username
-	private Athlete createNewUser(final BigInteger qrId, final byte[] macAddress) {
+	
+	private Athlete createNewUser(final BigInteger qrId, final String username) {
 		final Athlete athlete = Athlete.builder()
-				.username("defaultname")
-				.macAddress(macAddress)
+				.username(username)
 				.currentCurrency(BigInteger.ONE)
 				.totalCurrency(BigInteger.ONE)
 				.maximumSpent(BigInteger.ZERO)
