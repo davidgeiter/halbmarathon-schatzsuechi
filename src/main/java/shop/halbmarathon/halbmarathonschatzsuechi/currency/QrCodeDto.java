@@ -2,16 +2,15 @@ package shop.halbmarathon.halbmarathonschatzsuechi.currency;
 
 import java.math.BigInteger;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
-public class ResponseDto {
+@Builder
+public class QrCodeDto {
 
+	private String code;
 	private BigInteger difference;
-	private BigInteger currentCurrency;
 	private Boolean isValid;
-	private Boolean codeAlreadyScanned;
 
 }

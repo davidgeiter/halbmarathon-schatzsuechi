@@ -28,14 +28,14 @@ public class QrCode {
 	@SequenceGenerator(name = "QrCodeIdGenerator", sequenceName = "QR_CODE_ID_SEQ", allocationSize = 1)
 	private Long id;
 
-	private BigInteger code;
+	private String code;
 
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ATHLETE_ID", nullable = false)
 	private Athlete athlete;
 
-	public QrCode(final BigInteger code){
+	public QrCode(final String code){
 		this.code = code;
 	}
 
