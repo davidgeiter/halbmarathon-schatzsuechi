@@ -1,1 +1,3 @@
-export const apiHost = "http://localhost:8080/api"
+const { hostname, protocol } = window.location
+
+export const apiBaseUrl = `${protocol}//${hostname}:8080/api`

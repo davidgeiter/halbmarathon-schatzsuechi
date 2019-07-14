@@ -1,6 +1,9 @@
 import { createGlobalStyle } from "styled-components"
 
 export const GlobalStyles = createGlobalStyle`
+  html {
+    font-size: 100% !important;
+  }
   body, h1, h2, h3, div, p, span, button {
     font-family: Cousine !important;
     font-weight: bold;

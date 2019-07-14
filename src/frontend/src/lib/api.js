@@ -1,7 +1,7 @@
-import { apiHost } from "../config"
+import { apiBaseUrl } from "../config"
 
 const sendRequest = async ({ path, username, method }) => {
-  const url = `${apiHost}${path}${username ? `?username=${username}` : ""}`
+  const url = `${apiBaseUrl}${path}${username ? `?username=${username}` : ""}`
   const resp = await fetch(url, {
     method: method || "get",
   })

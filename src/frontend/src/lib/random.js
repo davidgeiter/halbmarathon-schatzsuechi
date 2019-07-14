@@ -39,7 +39,7 @@ export const colorizeCharArray = (
   const isRed = random.bernoulli(p)
   return (
     <span>
-      {chars.map((c, i) =>
+      {chars.map(c =>
         isRed() ? (
           <span style={{ color: "red" }}>
             {useSpecialChar ? getRandomChar(SPECIAL_CHAR_CODES) : c}
