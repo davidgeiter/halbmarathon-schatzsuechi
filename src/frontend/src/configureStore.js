@@ -6,6 +6,7 @@ import storage from "redux-persist/lib/storage" // defaults to localStorage for 
 
 const initialState = {
   username: null,
+  scannerOpened: false,
 }
 
 const persistConfig = {
@@ -15,12 +16,17 @@ const persistConfig = {
 }
 
 export const setUsername = createAction("setUsername", username => username)
+export const toggleScanner = createAction("toggleScanner", open => open)
 
 const rootReducer = handleActions(
   {
     [setUsername.toString()]: (state, { payload }) => ({
       ...state,
       username: payload,
+    }),
+    [toggleScanner.toString()]: (state, { payload }) => ({
+      ...state,
+      scannerOpened: payload,
     }),
   },
   initialState,

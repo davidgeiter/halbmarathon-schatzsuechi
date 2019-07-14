@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { sendCode } from "../lib/api"
-import { withUsername } from "../components/WithUsername"
+import { withUsername } from "../lib/state-hocs"
 import { Link } from "react-router-dom"
 
 const SuccessMessage = ({ result }) => (

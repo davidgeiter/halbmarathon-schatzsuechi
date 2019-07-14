@@ -1,19 +1,30 @@
 import React, { useState, useEffect, Fragment } from "react"
-import { withUsername } from "../components/WithUsername"
+import { withUsername, withScannerOpened } from "../lib/state-hocs"
 import QrCodeReader from "../components/QrCodeReader"
 import { getStats } from "../lib/api"
 import styled from "styled-components"
+import { YourStats } from "../components/YourStats"
+import { Progress } from "../components/Progress"
+import { Button } from "semantic-ui-react"
+import { compose } from "ramda"
+
+const ScanButton = styled(Button).attrs({ size: "huge", color: "black" })`
+  position: fixed;
+  bottom: 2rem;
+  transform: translateX(-50%);
+  width: 80%;
+`
 
 const PageTitle = styled.h1`
   && {
     width: 100%;
     text-align: center;
-    margin-top: 4rem;
+    padding-top: 8rem;
     margin-bottom: 4rem;
   }
 `
 
-export default withUsername(({ username }) => {
+const Home = ({ username, scannerOpened, toggleScanner }) => {
   const [stats, setStats] = useState(null)
 
   useEffect(() => {
@@ -24,28 +35,28 @@ export default withUsername(({ username }) => {
     makeRequest()
   }, [])
 
-  return (
-    <div>
-      <PageTitle>Hello {username}!</PageTitle>
-      {stats !== null && (
-        <Fragment>
-          <h2>Your Stats:</h2>
-          <ul>
-            <li>currentCurrency: {stats.currentCurrency}</li>
-            <li>totalCurrency: {stats.totalCurrency}</li>
-            <li>totalSpent: {stats.totalSpent}</li>
-            <li>totalCodesFound: {stats.totalCodesFound}</li>
-          </ul>
-        </Fragment>
-      )}
+  return !stats ? (
+    <Progress />
+  ) : (
+    <div style={{ textAlign: "center" }}>
+      <PageTitle>Hi {username}!</PageTitle>
+      <YourStats stats={stats} />
+      <ScanButton onClick={() => toggleScanner(true)}>Scan a Code</ScanButton>
 
-      <div>
-        <QrCodeReader
-          onValidUrl={url => {
-            window.location.href = url
-          }}
-        />
-      </div>
+      {scannerOpened && (
+        <div>
+          <QrCodeReader
+            onValidUrl={url => {
+              window.location.href = url
+            }}
+          />
+        </div>
+      )}
     </div>
   )
-})
+}
+
+export default compose(
+  withUsername,
+  withScannerOpened,
+)(Home)

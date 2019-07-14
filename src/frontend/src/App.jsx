@@ -5,11 +5,13 @@ import Home from "./pages/home"
 import ScanPage from "./pages/scan"
 import { WithLocalStorage } from "./components/WithLocalStorage"
 import { BrowserRouter as Router, Route } from "react-router-dom"
+import { GlobalStyles } from "./lib/globalStyles"
 
 const { store, persistor } = initializeStore()
 
 const App = () => (
   <Router>
+    <GlobalStyles />
     <Provider store={store}>
       <WithLocalStorage persistor={persistor}>
         <Route path="/" exact component={Home} />

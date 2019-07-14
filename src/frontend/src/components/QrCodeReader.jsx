@@ -1,9 +1,35 @@
 import QrReader from "react-qr-scanner"
 import React from "react"
+import styled from "styled-components"
+import { Button } from "semantic-ui-react"
+import { withScannerOpened } from "../lib/state-hocs"
+
+const CloseButton = styled(Button).attrs({
+  size: "massive",
+  color: "black",
+  circular: true,
+  icon: "close",
+})`
+  position: fixed;
+  bottom: 2rem;
+  transform: translateX(-50%);
+  width: 80%;
+`
+
+const Overlay = styled.div`
+  background-color: black;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  top: 0;
+  left: 0;
+`
 
 const previewStyle = {
-  height: 240,
-  width: "100%",
+  height: "100vw",
+  width: "100vw",
+  objectFit: "none",
 }
 
 const parseCode = value => {
@@ -15,18 +41,21 @@ const parseCode = value => {
   }
 }
 
-const QrCodeReader = ({ onValidUrl }) => (
-  <QrReader
-    delay={100}
-    style={previewStyle}
-    onError={console.error}
-    onScan={value => {
-      console.log(`Scanned: ${value}`)
-      if (parseCode(value)) {
-        onValidUrl(value)
-      }
-    }}
-  />
+const QrCodeReader = ({ onValidUrl, toggleScanner }) => (
+  <Overlay>
+    <QrReader
+      delay={100}
+      style={previewStyle}
+      onError={console.error}
+      onScan={value => {
+        console.log(`Scanned: ${value}`)
+        if (parseCode(value)) {
+          onValidUrl(value)
+        }
+      }}
+    />
+    <CloseButton onClick={() => toggleScanner(false)} />
+  </Overlay>
 )
 
-export default QrCodeReader
+export default withScannerOpened(QrCodeReader)

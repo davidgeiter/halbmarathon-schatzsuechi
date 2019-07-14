@@ -1,8 +1,8 @@
 import { connect } from "react-redux"
 import React, { Fragment, useState, createRef, useEffect } from "react"
-import { pick } from "ramda"
 import { setUsername } from "../configureStore"
 import { Modal, Header, Button, Input, Form } from "semantic-ui-react"
+import { withUsername } from "../lib/state-hocs"
 
 const UsernameForm = connect(
   null,
@@ -33,8 +33,6 @@ const UsernameForm = connect(
     </Modal>
   )
 })
-
-export const withUsername = C => connect(pick(["username"]))(C)
 
 export const EnforceUsername = withUsername(({ username, children }) => {
   if (!username) {
