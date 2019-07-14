@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import random from "random"
+import { colorizeCharArray, getRandomChars } from "../lib/random"
 
 const ProgressContainer = styled.div`
   display: flex;
@@ -10,19 +10,6 @@ const ProgressContainer = styled.div`
   align-items: center;
   font-size: 1.5rem;
 `
-
-const isRed = random.bernoulli(0.1)
-const getRandList = (n, [min, max]) => {
-  const result = new Set()
-  while (result.size < n) {
-    const next = random.int(min, max)
-    if (!result.has(next)) result.add(next)
-  }
-  return [...result]
-}
-const getColor = () => (isRed() ? "red" : "black")
-
-const charRange = [32, 126]
 
 class ProgressComponent extends React.Component {
   componentDidMount() {
@@ -34,12 +21,11 @@ class ProgressComponent extends React.Component {
   }
 
   render() {
-    const chars = getRandList(10, charRange).map(c => (
-      <span style={{ color: getColor() }}>{String.fromCharCode(c)}</span>
-    ))
+    const chars = getRandomChars(10)
+    const colorizedChars = colorizeCharArray(chars)
     return (
       <ProgressContainer>
-        <div>..{chars}..</div>
+        <div>{colorizedChars}</div>
       </ProgressContainer>
     )
   }

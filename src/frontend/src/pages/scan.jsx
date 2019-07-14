@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { sendCode } from "../lib/api"
 import { withUsername } from "../lib/state-hocs"
 import { Link } from "react-router-dom"
+import { Progress } from "../components/Progress"
 
 const SuccessMessage = ({ result }) => (
   <span>
@@ -46,7 +47,7 @@ const Scan = withUsername(({ match, username }) => {
   }, [])
 
   if (result === null) {
-    return <span>Sending CODE...</span>
+    return <Progress />
   } else {
     return (
       <div>

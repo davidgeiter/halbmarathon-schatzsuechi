@@ -7,19 +7,43 @@ import { YourStats } from "../components/YourStats"
 import { Progress } from "../components/Progress"
 import { Button } from "semantic-ui-react"
 import { compose } from "ramda"
+import Layout from "../components/Layout"
+import { randIndex } from "../lib/random"
+import Flickering from "../components/Flickering"
 
-const ScanButton = styled(Button).attrs({ size: "huge", color: "black" })`
-  position: fixed;
-  bottom: 2rem;
-  transform: translateX(-50%);
-  width: 80%;
+const ScanButton = styled(Button).attrs({
+  size: "huge",
+  color: "black",
+})`
+  && {
+    background-color: black;
+    position: fixed;
+    bottom: 2rem;
+    transform: translateX(-50%);
+    width: 80%;
+
+    border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+
+    span {
+      color: white;
+    }
+  }
 `
 
-const PageTitle = styled.h1`
+const Salutation = styled.h1`
   && {
-    width: 100%;
-    text-align: center;
+    font-size: 3.5rem;
     padding-top: 8rem;
+    margin-bottom: 0;
+  }
+`
+
+const PageTitle = styled.h2`
+  && {
+    margin-top: 0;
     margin-bottom: 4rem;
   }
 `
@@ -35,24 +59,29 @@ const Home = ({ username, scannerOpened, toggleScanner }) => {
     makeRequest()
   }, [])
 
-  return !stats ? (
-    <Progress />
-  ) : (
-    <div style={{ textAlign: "center" }}>
-      <PageTitle>Hi {username}!</PageTitle>
-      <YourStats stats={stats} />
-      <ScanButton onClick={() => toggleScanner(true)}>Scan a Code</ScanButton>
+  if (!stats) {
+    return <Progress />
+  }
 
-      {scannerOpened && (
-        <div>
-          <QrCodeReader
-            onValidUrl={url => {
-              window.location.href = url
-            }}
-          />
-        </div>
-      )}
-    </div>
+  return scannerOpened ? (
+    <QrCodeReader
+      onValidUrl={url => {
+        window.location.href = url
+      }}
+    />
+  ) : (
+    <Layout style={{ textAlign: "center" }}>
+      <Salutation>
+        <Flickering>{randIndex(["Hi", "Hola", "Ciao", "Salu"])}</Flickering>
+      </Salutation>
+      <PageTitle>
+        <Flickering>{username}</Flickering>
+      </PageTitle>
+      <YourStats stats={stats} />
+      <ScanButton onClick={() => toggleScanner(true)}>
+        <Flickering>Scan a Code</Flickering>
+      </ScanButton>
+    </Layout>
   )
 }
 

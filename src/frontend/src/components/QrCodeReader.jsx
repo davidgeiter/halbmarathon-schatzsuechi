@@ -14,6 +14,7 @@ const CloseButton = styled(Button).attrs({
   bottom: 2rem;
   transform: translateX(-50%);
   width: 80%;
+  background-color: black !important;
 `
 
 const Overlay = styled.div`
@@ -24,6 +25,7 @@ const Overlay = styled.div`
   z-index: 100;
   top: 0;
   left: 0;
+  text-align: center;
 `
 
 const previewStyle = {
