@@ -49,7 +49,7 @@ public class CurrencyService {
 
 	private Optional<QrCodeDto> getQrCode(final String qrId) {
 		List<List<String>> records = new ArrayList<>();
-		try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/qrCodes.csv"))) {
+		try (BufferedReader br = new BufferedReader(new FileReader("halbmarathon-schatzsuechi-backend/src/main/resources/qrCodes.csv"))) {
 			String line;
 			while ((line = br.readLine()) != null) {
 				String[] values = line.split(",");
