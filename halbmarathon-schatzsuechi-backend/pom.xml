@@ -7,7 +7,6 @@
     <artifactId>halbmarathon-schatzsuechi</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-	<groupId>shop.halbmarathon</groupId>
 	<artifactId>halbmarathon-schatzsuechi-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
