@@ -46,12 +46,12 @@ const Leaderboard = () => {
       <BigTitle style={{ paddingTop: "1rem", marginBottom: "2rem" }}>
         <Flickering>Leaderboard</Flickering>
       </BigTitle>
-/*      <Entry>
+      {/*      <Entry>
         <Username style={{ flexGrow: "1", textAlign: "left" }}>
           UNSERNAME:
         </Username>
         <span>SCANNED CODES:</span>
-      </Entry>*/
+      </Entry>*/}
       {scores.map(({ username, score }, i) => (
         <Entry>
           <Price>
