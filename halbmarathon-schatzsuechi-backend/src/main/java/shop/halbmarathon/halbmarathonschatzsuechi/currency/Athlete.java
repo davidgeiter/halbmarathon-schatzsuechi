@@ -41,7 +41,6 @@ public class Athlete {
 	@Setter(AccessLevel.NONE)
 	private List<QrCode> codes;
 
-
 	public void addQrCode(final QrCode code) {
 		if (codes == null) {
 			setEmptyQrCodeList();
@@ -55,12 +54,17 @@ public class Athlete {
 	}
 
 	public boolean qrCodeExists(final String qrCode) {
-		return codes.stream().anyMatch(c -> qrCode.equals(c.getCode()));
+		if (qrCode == null) {
+			return false;
+		} else {
+			return codes.stream().anyMatch(c -> qrCode.equals(c.getCode()));
+		}
 	}
 
 	public int getTotalCodesAsInt() {
 		return totalCodesFound.intValue();
 	}
+
 	public Athlete() {
 		//default constructor
 	}
