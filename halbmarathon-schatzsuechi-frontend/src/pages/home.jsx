@@ -15,14 +15,13 @@ import { randIndex } from "../lib/random"
 import Flickering from "../components/Flickering"
 import { BigTitle, SmallTitle } from "../components/Title"
 import { ResultOverlay } from "../components/scan-results"
-import { parse } from "query-string"
 
 const WelcomeText = () => {
   const texts = [
     "Scan codes 📳, ",
     "collect coins 💰 ",
     "and trade them for some special goodies ",
-    "your local bar! 🍼",
+    "at your local bar! 🍼",
   ]
   return (
     <div>
