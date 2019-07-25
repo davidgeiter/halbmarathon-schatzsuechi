@@ -1,5 +1,9 @@
 import React, { useState, useEffect, Fragment } from "react"
-import { withUsername, withScannerOpened } from "../lib/state-hocs"
+import {
+  withUsername,
+  withScannerOpened,
+  withScanResult,
+} from "../lib/state-hocs"
 import QrCodeReader from "../components/QrCodeReader"
 import { getStats } from "../lib/api"
 import styled from "styled-components"
@@ -10,7 +14,8 @@ import { compose } from "ramda"
 import { randIndex } from "../lib/random"
 import Flickering from "../components/Flickering"
 import { BigTitle, SmallTitle } from "../components/Title"
-import { withRouter } from "react-router-dom"
+import { ResultOverlay } from "../components/scan-results"
+import { parse } from "query-string"
 
 const ScanButton = styled(Button).attrs({
   size: "massive",
@@ -24,8 +29,20 @@ const ScanButton = styled(Button).attrs({
   }
 `
 
-const Home = ({ username, scannerOpened, toggleScanner, match }) => {
+const Home = ({
+  username,
+  scannerOpened,
+  toggleScanner,
+  scanResult,
+  setScanResult,
+}) => {
   const [stats, setStats] = useState(null)
+
+  useEffect(() => {
+    if (scanResult) {
+      setTimeout(() => setScanResult(null), 5000)
+    }
+  }, [])
 
   useEffect(() => {
     const makeRequest = async () => {
@@ -57,6 +74,13 @@ const Home = ({ username, scannerOpened, toggleScanner, match }) => {
       <ScanButton onClick={() => toggleScanner(true)}>
         <Flickering>Scan a Code</Flickering>
       </ScanButton>
+      {scanResult && (
+        <ResultOverlay
+          status={scanResult.status}
+          difference={scanResult.difference}
+          onClose={() => setScanResult(null)}
+        />
+      )}
     </div>
   )
 }
@@ -64,5 +88,5 @@ const Home = ({ username, scannerOpened, toggleScanner, match }) => {
 export default compose(
   withUsername,
   withScannerOpened,
-  withRouter,
+  withScanResult,
 )(Home)

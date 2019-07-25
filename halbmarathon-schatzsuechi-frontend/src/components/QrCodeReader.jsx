@@ -4,7 +4,7 @@ import styled from "styled-components"
 import { Button } from "semantic-ui-react"
 import { withScannerOpened } from "../lib/state-hocs"
 
-const CloseButton = styled(Button).attrs({
+export const CloseButton = styled(Button).attrs({
   size: "massive",
   color: "black",
   circular: true,
