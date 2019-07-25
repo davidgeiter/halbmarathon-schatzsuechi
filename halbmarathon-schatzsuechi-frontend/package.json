@@ -1,0 +1,54 @@
+{
+  "name": "halbmarathon-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "query-string": "^6.8.1",
+    "ramda": "^0.26.1",
+    "random": "^2.1.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-qr-scanner": "^0.0.8",
+    "react-redux": "^7.1.0",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "3.0.1",
+    "redux": "^4.0.4",
+    "redux-actions": "^2.6.5",
+    "redux-persist": "^5.10.0",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.87.3",
+    "styled-components": "^4.3.2",
+    "typeface-cousine": "^0.0.72"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^5.1.9",
+    "@storybook/addon-links": "^5.1.9",
+    "@storybook/addons": "^5.1.9",
+    "@storybook/react": "^5.1.9",
+    "cross-env": "^5.2.0",
+    "redux-devtools-extension": "^2.13.8"
+  },
+  "scripts": {
+    "start": "cross-env PORT=8081 react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
