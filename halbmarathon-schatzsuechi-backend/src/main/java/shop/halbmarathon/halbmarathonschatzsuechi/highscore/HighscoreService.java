@@ -20,10 +20,10 @@ public class HighscoreService {
 	public ScoresDto getHighscores() {
 		final List<Score> scores = currencyRepository.findAll().stream()
 				.sorted(Comparator.comparingInt(Athlete::getTotalCodesAsInt))
-				//.limit(10)
 				.map(a -> new Score(a.getTotalCodesFound(), a.getUsername()))
 				.collect(Collectors.toList());
 		Collections.reverse(scores);
-		return new ScoresDto(scores);
+		final List<Score> result = scores.stream().limit(10).collect(Collectors.toList());
+		return new ScoresDto(result);
 	}
 }
