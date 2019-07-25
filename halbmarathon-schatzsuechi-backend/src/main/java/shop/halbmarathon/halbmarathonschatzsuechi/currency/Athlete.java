@@ -54,7 +54,7 @@ public class Athlete {
 	}
 
 	public boolean qrCodeExists(final String qrCode) {
-		if (qrCode == null || qrCode.isEmpty()) {
+		if (qrCode == null || codes == null || codes.isEmpty()) {
 			return false;
 		} else {
 			return codes.stream().anyMatch(c -> qrCode.equals(c.getCode()));
