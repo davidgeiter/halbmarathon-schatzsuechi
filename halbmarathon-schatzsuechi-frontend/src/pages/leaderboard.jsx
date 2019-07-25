@@ -44,7 +44,7 @@ const Leaderboard = () => {
   return (
     <Layout>
       <BigTitle style={{ paddingTop: "1rem", marginBottom: "2rem" }}>
-        Leaderboard
+        <Flickering>Leaderboard</Flickering>
       </BigTitle>
       {scores.map(({ username, score }, i) => (
         <Entry>
