@@ -47,6 +47,7 @@ const QrCodeReader = ({ onValidUrl, toggleScanner }) => (
   <Overlay>
     <QrReader
       delay={100}
+      facingMode="rear"
       style={previewStyle}
       onError={console.error}
       onScan={value => {
