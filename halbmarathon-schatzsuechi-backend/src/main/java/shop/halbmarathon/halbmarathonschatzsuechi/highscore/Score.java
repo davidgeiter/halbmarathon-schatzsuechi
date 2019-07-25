@@ -9,4 +9,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class Score {
 	private BigInteger score;
+	private String username;
 }
