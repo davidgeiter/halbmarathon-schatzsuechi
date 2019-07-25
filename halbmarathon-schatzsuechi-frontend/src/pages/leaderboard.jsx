@@ -45,6 +45,12 @@ const Leaderboard = () => {
       <BigTitle style={{ paddingTop: "1rem", marginBottom: "2rem" }}>
         Leaderboard
       </BigTitle>
+      <Entry>
+        <Username style={{ flexGrow: "1", textAlign: "left" }}>
+          UNSERNAME:
+        </Username>
+        <span>SCANNED CODES:</span>
+      </Entry>
       {scores.map(({ username, score }, i) => (
         <Entry>
           <Price>
