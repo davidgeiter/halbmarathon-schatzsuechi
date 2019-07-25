@@ -1,5 +1,6 @@
 package shop.halbmarathon.halbmarathonschatzsuechi.highscore;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +23,7 @@ public class HighscoreService {
 				.limit(10)
 				.map(a -> new Score(a.getTotalCodesFound(), a.getUsername()))
 				.collect(Collectors.toList());
+		Collections.reverse(scores);
 		return new ScoresDto(scores);
 	}
 }
