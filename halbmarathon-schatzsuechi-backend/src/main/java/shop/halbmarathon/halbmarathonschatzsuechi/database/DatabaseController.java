@@ -27,8 +27,8 @@ public class DatabaseController {
 		return currencyRepository.findAthleteByUsername(username);
 	}
 
-	@DeleteMapping(value = "/api/database/delete/{username}", produces = "application/json")
+	@DeleteMapping(value = "/api/database/delete/{username}")
 	public void deleteAthlete(@PathVariable final String username) {
-		currencyRepository.deleteAthleteByUsername(username);
+		currencyRepository.removeAthleteByUsername(username);
 	}
 }

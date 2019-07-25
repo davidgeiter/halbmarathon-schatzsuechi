@@ -10,6 +10,6 @@ public interface CurrencyRepository extends JpaRepository<Athlete, String> {
 
 	Athlete findAthleteByUsername(final String username);
 
-	void deleteAthleteByUsername(final String username);
+	void removeAthleteByUsername(final String username);
 
 }
