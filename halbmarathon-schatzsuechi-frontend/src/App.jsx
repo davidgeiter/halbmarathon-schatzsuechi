@@ -3,6 +3,7 @@ import { Provider } from "react-redux"
 import { initializeStore } from "./configureStore"
 import Home from "./pages/home"
 import ScanPage from "./pages/scan"
+import Leaderboard from "./pages/leaderboard"
 import { WithLocalStorage } from "./components/WithLocalStorage"
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import { GlobalStyles } from "./lib/globalStyles"
@@ -24,6 +25,7 @@ const App = () => (
         <WithLocalStorage persistor={persistor}>
           <Route path="/" exact component={Home} />
           <Route path="/scan/:guid" exact component={ScanPage} />
+          <Route path="/leaderboard" exact component={Leaderboard} />
         </WithLocalStorage>
       </Layout>
     </Provider>

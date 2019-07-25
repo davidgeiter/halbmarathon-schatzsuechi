@@ -15,3 +15,5 @@ export const getStats = async username =>
 
 export const sendCode = (code, username) =>
   sendRequest({ path: `/currency/${code}`, username, method: "post" })
+
+export const getLeaderboard = () => sendRequest({ path: `/highscore` })
