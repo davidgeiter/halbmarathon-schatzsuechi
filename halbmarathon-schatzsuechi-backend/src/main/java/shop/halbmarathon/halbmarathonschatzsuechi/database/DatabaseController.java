@@ -2,6 +2,7 @@ package shop.halbmarathon.halbmarathonschatzsuechi.database;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,5 +25,10 @@ public class DatabaseController {
 	@GetMapping(value = "/api/database/{username}", produces = "application/json")
 	public Athlete getAthlete(@PathVariable final String username) {
 		return currencyRepository.findAthleteByUsername(username);
+	}
+
+	@DeleteMapping(value = "/api/database/delete/{username}", produces = "application/json")
+	public void deleteAthlete(@PathVariable final String username) {
+		currencyRepository.deleteAthleteByUsername(username);
 	}
 }
