@@ -8,4 +8,6 @@ public interface CurrencyRepository extends JpaRepository<Athlete, String> {
 
 	List<Athlete> findAll();
 
+	Athlete findAthleteByUsername(final String usename);
+
 }
