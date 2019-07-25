@@ -5,6 +5,8 @@ import { Button, Input } from "semantic-ui-react"
 import { withUsername } from "../lib/state-hocs"
 import styled from "styled-components"
 import { SmallTitle } from "./Title"
+import { fetchAllUsers } from "../lib/api"
+import { Progress } from "./Progress"
 
 const Layout = styled.div`
   display: flex;
@@ -16,13 +18,26 @@ const UsernameForm = connect(
   { setUsername },
 )(({ setUsername }) => {
   const [entry, setEntry] = useState("")
+  const [existingUsers, setExistingUsers] = useState(null)
   const inputRef = createRef()
 
   useEffect(() => {
     if (inputRef.current) inputRef.current.focus()
   }, [])
 
-  return (
+  useEffect(() => {
+    const makeRequest = async () => {
+      const resp = await fetchAllUsers()
+      setExistingUsers(resp)
+    }
+    makeRequest()
+  }, [])
+
+  const taken = existingUsers && existingUsers.includes(entry)
+
+  return existingUsers === null ? (
+    <Progress />
+  ) : (
     <form>
       <Layout>
         <SmallTitle style={{ marginTop: "4rem" }}>
@@ -38,13 +53,17 @@ const UsernameForm = connect(
           }}
         />
         <Button
-          disabled={!entry || entry.length > 50}
+          disabled={!entry || entry.length > 50 || taken}
           type="submit"
           size="massive"
           color="black"
           onClick={() => setUsername(entry)}
+          style={{
+            height: "4rem",
+            ...(taken ? { fontSize: "1.5rem" } : undefined),
+          }}
         >
-          Let's Go!
+          {taken ? "already taken 😞" : "Let's Go!"}
         </Button>
       </Layout>
     </form>

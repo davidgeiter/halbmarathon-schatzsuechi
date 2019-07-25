@@ -9,7 +9,7 @@ const BaseOverlay = styled.div`
   left: 0;
   height: 100vh;
   width: 100vw;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: black;
 
   h1,
   h2 {

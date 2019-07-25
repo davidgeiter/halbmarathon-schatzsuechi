@@ -15,7 +15,24 @@ import { randIndex } from "../lib/random"
 import Flickering from "../components/Flickering"
 import { BigTitle, SmallTitle } from "../components/Title"
 import { ResultOverlay } from "../components/scan-results"
-import { parse } from "query-string"
+
+const WelcomeText = () => {
+  const texts = [
+    "Scan codes 📳, ",
+    "collect coins 💰 ",
+    "and trade them for some special goodies ",
+    "at your local bar! 🍼",
+  ]
+  return (
+    <div>
+      {texts.map(t => (
+        <p style={{ display: "inline" }}>
+          <Flickering>{t}</Flickering>
+        </p>
+      ))}
+    </div>
+  )
+}
 
 const ScanButton = styled(Button).attrs({
   size: "massive",
@@ -72,13 +89,17 @@ const Home = ({
     />
   ) : (
     <div>
-      <BigTitle>
+      <BigTitle style={{ paddingTop: "2rem" }}>
         <Flickering>{randIndex(["Hi", "Hola", "Ciao", "Salu"])}</Flickering>
       </BigTitle>
       <SmallTitle>
         <Flickering>{username}</Flickering>
       </SmallTitle>
-      <YourStats stats={stats} />
+      {stats.totalCodesFound === 0 ? (
+        <WelcomeText />
+      ) : (
+        <YourStats stats={stats} />
+      )}
       <ScanButton onClick={() => toggleScanner(true)}>
         <Flickering>Scan a Code</Flickering>
       </ScanButton>

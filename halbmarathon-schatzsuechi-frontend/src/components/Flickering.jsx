@@ -30,7 +30,11 @@ class Flickering extends React.PureComponent {
   render() {
     const { children } = this.props
     if (typeof children !== "string") {
-      throw new Error("<Flickering/> accepts only pure strings as children")
+      throw new Error(
+        `<Flickering/> accepts only pure strings as children, found ${
+          children.constructor.name
+        }`,
+      )
     }
 
     return (
