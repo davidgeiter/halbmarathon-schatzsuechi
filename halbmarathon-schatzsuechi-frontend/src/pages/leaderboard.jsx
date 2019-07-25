@@ -3,6 +3,7 @@ import { getLeaderboard } from "../lib/api"
 import { Progress } from "../components/Progress"
 import { BigTitle } from "../components/Title"
 import styled from "styled-components"
+import Flickering from "../components/Flickering"
 
 const Price = styled.div`
   width: 30px;
@@ -48,12 +49,14 @@ const Leaderboard = () => {
       {scores.map(({ username, score }, i) => (
         <Entry>
           <Price>
-            {i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : " "}
+            <Flickering>
+              {i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : " "}
+            </Flickering>
           </Price>
           <Username style={{ flexGrow: "1", textAlign: "left" }}>
-            {username}
+            <Flickering>{username}</Flickering>
           </Username>
-          <span>{score}</span>
+          <Flickering>{score.toString()}</Flickering>
         </Entry>
       ))}
     </Layout>
