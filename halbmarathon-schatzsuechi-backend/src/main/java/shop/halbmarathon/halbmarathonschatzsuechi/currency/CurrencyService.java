@@ -91,7 +91,7 @@ public class CurrencyService {
 		if (code.getDifference().signum() == 1) { // bigger than 0
 			athlete.setTotalCodesFound(athlete.getTotalCodesFound().add(BigInteger.ONE));
 			athlete.setTotalCurrency(athlete.getTotalCurrency().add(code.getDifference()));
-			athlete.addQrCode(new QrCode(code.getCode()));
+			athlete.addQrCode(new QrCode(code.getCode(), code.getDifference()));
 		} else {
 			athlete.setMaximumSpent(athlete.getMaximumSpent().add(code.getDifference().abs()));
 		}

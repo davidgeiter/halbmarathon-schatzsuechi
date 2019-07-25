@@ -29,14 +29,16 @@ public class QrCode {
 	private Long id;
 
 	private String code;
+	private BigInteger value;
 
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ATHLETE_USERNAME", nullable = false)
 	private Athlete athlete;
 
-	public QrCode(final String code){
+	public QrCode(final String code, final BigInteger value){
 		this.code = code;
+		this.value = value;
 	}
 
 	public QrCode() {
