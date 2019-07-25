@@ -23,7 +23,7 @@ public class HighscoreService {
 				.map(a -> new Score(a.getTotalCodesFound(), a.getUsername()))
 				.collect(Collectors.toList());
 		Collections.reverse(scores);
-		final List<Score> result = scores.stream().limit(10).collect(Collectors.toList());
+		final List<Score> result = scores.stream().limit(20).collect(Collectors.toList());
 		return new ScoresDto(result);
 	}
 }
