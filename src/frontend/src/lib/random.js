@@ -40,7 +40,7 @@ export const colorizeCharArray = (
   return (
     <span>
       {chars.map(c =>
-        isRed() ? (
+        isRed() && c.charCodeAt(0) < 128 ? (
           <span style={{ color: "red" }}>
             {useSpecialChar ? getRandomChar(SPECIAL_CHAR_CODES) : c}
           </span>

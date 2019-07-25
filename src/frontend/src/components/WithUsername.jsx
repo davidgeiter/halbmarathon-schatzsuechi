@@ -3,6 +3,13 @@ import React, { Fragment, useState, createRef, useEffect } from "react"
 import { setUsername } from "../configureStore"
 import { Modal, Header, Button, Input, Form } from "semantic-ui-react"
 import { withUsername } from "../lib/state-hocs"
+import styled from "styled-components"
+import { BigTitle, SmallTitle } from "./Title"
+
+const Layout = styled.div`
+  display: flex;
+  flex-direction: column;
+`
 
 const UsernameForm = connect(
   null,
@@ -12,25 +19,34 @@ const UsernameForm = connect(
   const inputRef = createRef()
 
   useEffect(() => {
-    setTimeout(() => inputRef.current && inputRef.current.focus(), 1000)
+    if (inputRef.current) inputRef.current.focus()
   }, [])
 
   return (
-    <Modal centered={false} defaultOpen={true} size="large">
-      <Modal.Header>Tell us your name!</Modal.Header>
-      <Modal.Content>
-        <Modal.Description>
-          <Form onSubmit={() => setUsername(entry)}>
-            <Form.Input
-              ref={inputRef}
-              focus
-              value={entry}
-              onChange={e => setEntry(e.target.value)}
-            />
-          </Form>
-        </Modal.Description>
-      </Modal.Content>
-    </Modal>
+    <form>
+      <Layout>
+        <SmallTitle style={{ marginTop: "4rem" }}>
+          Tell us your Name:
+        </SmallTitle>
+        <Input
+          ref={inputRef}
+          size="massive"
+          onChange={(_, data) => setEntry(data.value)}
+          value={entry}
+          style={{
+            paddingBottom: "1rem",
+          }}
+        />
+        <Button
+          type="submit"
+          size="massive"
+          color="black"
+          onClick={() => setUsername(entry)}
+        >
+          Let's Go!
+        </Button>
+      </Layout>
+    </form>
   )
 })
 

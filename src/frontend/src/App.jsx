@@ -6,17 +6,26 @@ import ScanPage from "./pages/scan"
 import { WithLocalStorage } from "./components/WithLocalStorage"
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import { GlobalStyles } from "./lib/globalStyles"
+import styled from "styled-components"
 
 const { store, persistor } = initializeStore()
+
+export const Layout = styled.div`
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+`
 
 const App = () => (
   <Router>
     <GlobalStyles />
     <Provider store={store}>
-      <WithLocalStorage persistor={persistor}>
-        <Route path="/" exact component={Home} />
-        <Route path="/scan/:guid" exact component={ScanPage} />
-      </WithLocalStorage>
+      <Layout>
+        <WithLocalStorage persistor={persistor}>
+          <Route path="/" exact component={Home} />
+          <Route path="/scan/:guid" exact component={ScanPage} />
+        </WithLocalStorage>
+      </Layout>
     </Provider>
   </Router>
 )

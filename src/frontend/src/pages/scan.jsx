@@ -1,23 +1,26 @@
 import React, { useState, useEffect } from "react"
 import { sendCode } from "../lib/api"
 import { withUsername } from "../lib/state-hocs"
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 import { Progress } from "../components/Progress"
+import { AlreadyScanned } from "../components/scan-results/AlreadyScanned"
+import styled from "styled-components"
+import qs from "query-string"
 
-const SuccessMessage = ({ result }) => (
+export const SuccessMessage = ({ result }) => (
   <span>
     Congrats! You topped your score by {result.difference}, now at
     {result.currentCurrency}
   </span>
 )
-const AlreadyScanned = () => <span>Already got that one!</span>
-const InvalidCode = () => <span>Oi! Don't fuck the system!</span>
-const Spent = () => <span>Thanks for the purchase! Enjoy</span>
-const NotEnoughCash = () => (
+
+export const InvalidCode = () => <span>Oi! Don't fuck the system!</span>
+export const Spent = () => <span>Thanks for the purchase! Enjoy</span>
+export const NotEnoughCash = () => (
   <span>Sorry honeyyy, but you can't afford that!</span>
 )
 
-const Result = ({ result }) => {
+const getRedirectType = result => {
   const { status, difference } = result
 
   switch (status) {
@@ -49,12 +52,10 @@ const Scan = withUsername(({ match, username }) => {
   if (result === null) {
     return <Progress />
   } else {
-    return (
-      <div>
-        <Result result={result} />
-        <Link to="/">Scan another one</Link>
-      </div>
-    )
+    const { status, difference } = result
+    const url = `/?${qs.stringify({ status, difference })}`
+
+    return <Redirect to={url} />
   }
 })
 

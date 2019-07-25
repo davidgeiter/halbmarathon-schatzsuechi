@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "query-string": "^6.8.1",
     "ramda": "^0.26.1",
     "random": "^2.1.1",
     "react": "^16.8.6",
