@@ -20,6 +20,11 @@ const Username = styled.span`
   overflow: hidden;
 `
 
+const Layout = styled.div`
+  width: 500px;
+  margin: 0 auto;
+`
+
 const Leaderboard = () => {
   const [scores, setScores] = useState(null)
 
@@ -36,9 +41,9 @@ const Leaderboard = () => {
   }
 
   return (
-    <>
+    <Layout>
       <BigTitle style={{ paddingTop: "1rem", marginBottom: "2rem" }}>
-        Leaders
+        Leaderboard
       </BigTitle>
       {scores.map(({ username, score }, i) => (
         <Entry>
@@ -51,7 +56,7 @@ const Leaderboard = () => {
           <span>{score}</span>
         </Entry>
       ))}
-    </>
+    </Layout>
   )
 }
 

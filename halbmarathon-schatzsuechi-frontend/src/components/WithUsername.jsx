@@ -1,10 +1,10 @@
 import { connect } from "react-redux"
 import React, { Fragment, useState, createRef, useEffect } from "react"
 import { setUsername } from "../configureStore"
-import { Modal, Header, Button, Input, Form } from "semantic-ui-react"
+import { Button, Input } from "semantic-ui-react"
 import { withUsername } from "../lib/state-hocs"
 import styled from "styled-components"
-import { BigTitle, SmallTitle } from "./Title"
+import { SmallTitle } from "./Title"
 
 const Layout = styled.div`
   display: flex;
@@ -26,7 +26,7 @@ const UsernameForm = connect(
     <form>
       <Layout>
         <SmallTitle style={{ marginTop: "4rem" }}>
-          Tell us your Name:
+          Tell us your funny Name:
         </SmallTitle>
         <Input
           ref={inputRef}
@@ -38,6 +38,7 @@ const UsernameForm = connect(
           }}
         />
         <Button
+          disabled={!entry || entry.length > 50}
           type="submit"
           size="massive"
           color="black"

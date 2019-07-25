@@ -29,6 +29,14 @@ const ScanButton = styled(Button).attrs({
   }
 `
 
+const Credits = styled.p`
+  position: fixed;
+  bottom: 5rem;
+  font-size: 0.8rem;
+  text-align: center;
+  width: 90vw;
+`
+
 const Home = ({
   username,
   scannerOpened,
@@ -74,6 +82,7 @@ const Home = ({
       <ScanButton onClick={() => toggleScanner(true)}>
         <Flickering>Scan a Code</Flickering>
       </ScanButton>
+      <Credits>spacebrothers</Credits>
       {scanResult && (
         <ResultOverlay
           status={scanResult.status}
