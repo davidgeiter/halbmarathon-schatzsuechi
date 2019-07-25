@@ -47,6 +47,11 @@ public class CurrencyService {
 				.findAny().orElseGet(() -> createNewUser(username));
 	}
 
+	public boolean doesUsernameExist(final String username) {
+		return currencyRepository.findAll().stream()
+				.anyMatch(a -> username.equals(a.getUsername()));
+	}
+
 	private Optional<QrCodeDto> getQrCode(final String qrId) {
 		List<List<String>> records = new ArrayList<>();
 		try (BufferedReader br = new BufferedReader(new FileReader("halbmarathon-schatzsuechi-backend/src/main/resources/qrCodes.csv"))) {
