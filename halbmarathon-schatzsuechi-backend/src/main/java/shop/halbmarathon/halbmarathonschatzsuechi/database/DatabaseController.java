@@ -29,6 +29,7 @@ public class DatabaseController {
 
 	@DeleteMapping(value = "/api/database/delete/{username}")
 	public void deleteAthlete(@PathVariable final String username) {
-		currencyRepository.removeAthleteByUsername(username);
+		final Athlete athlete = currencyRepository.findAthleteByUsername(username);
+		currencyRepository.delete(athlete);
 	}
 }
